@@ -1,8 +1,10 @@
 import os
 import logging as lg
+import smtplib as sm
+from email.mime.text import MIMEText
 
 
-class DepliegueAmbiente:
+class Reutilizables:
 
     def __init__(self):
 
@@ -31,11 +33,11 @@ class DepliegueAmbiente:
                 else:
                     print(f"Carpeta de {carpeta} ya existe")
 
-                ejecucionPrueba=DepliegueAmbiente()
+                ejecucionPrueba=Reutilizables()
                 ejecucionPrueba.audit_log('El despliegue de ambiente fue exitoso ', 'Despliegue de ambiente')
             
         except Exception as e:
-            ejecucionPrueba=DepliegueAmbiente()
+            ejecucionPrueba=Reutilizables()
             ejecucionPrueba.error_log('Ocurrio un error en la funcion (crearCarpte) en el archivo: ', 'DespliegueAmbiente')
 
     def audit_log(self, message, name_file):
@@ -47,7 +49,10 @@ class DepliegueAmbiente:
 
         lg.basicConfig(filename='example.log', encoding='utf-8', level=lg.DEBUG, format='%(asctime)s - %(levelname)s- %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
         lg.info(f'{message}. {name_file}')
+
+    def Enviar_notificacion(self):
+        pass
         
-ejecucionPrueba=DepliegueAmbiente()
+ejecucionPrueba=Reutilizables()
 
 ejecucionPrueba.audit_log('se inicio la subtarea', 'Despliegue de ambiente')
