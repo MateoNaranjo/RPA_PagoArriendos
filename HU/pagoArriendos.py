@@ -83,4 +83,3 @@ ejecutarMain=PagoArriendos(SAP_CONIFG.get('SAP_USUARIO'),
 
 ejecutarMain.abrir_SAP()
 
-ejecutarMain.ingresar_SAP(ejecutarMain.conectar_SAP())
