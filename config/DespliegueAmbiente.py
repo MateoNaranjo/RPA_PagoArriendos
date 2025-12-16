@@ -2,18 +2,19 @@ import os
 import logging as lg
 import smtplib as sm
 from email.mime.text import MIMEText
+from settings import RUTAS
 
 
 class Reutilizables:
 
-    def __init__(self):
+    def __init__(self, path_proyecto, path_audit, path_logs, path_temp, path_insumo, path_resultado):
 
-        self.path_proyecto = "C:/ProgramData/RPA_PagoArriendos"
-        self.path_audit = "C:/ProgramData/RPA_PagoArriendos/Audit"
-        self.path_logs = "C:/ProgramData/RPA_PagoArriendos/Audit/Logs"
-        self.path_temp ="C:/ProgramData/RPA_PagoArriendos/Temp"
-        self.path_insumo = "C:/ProgramData/RPA_PagoArriendos/Insumo"
-        self.path_resultado = "C:/ProgramData/RPA_PagoArriendos/Resultado"
+        self.path_proyecto = path_proyecto
+        self.path_audit = path_audit
+        self.path_logs = path_logs
+        self.path_temp =path_temp
+        self.path_insumo = path_insumo
+        self.path_resultado = path_resultado
 
     def crearCarpetas (self):
     
@@ -26,6 +27,7 @@ class Reutilizables:
                 self.path_insumo,
                 self.path_resultado
             ]:
+                
                 if not os.path.exists(carpeta):
                     os.mkdir(carpeta)
                     print(f"Carpeta creada con éxito: {carpeta}")
@@ -33,12 +35,12 @@ class Reutilizables:
                 else:
                     print(f"Carpeta de {carpeta} ya existe")
 
-                ejecucionPrueba=Reutilizables()
-                ejecucionPrueba.audit_log('El despliegue de ambiente fue exitoso ', 'Despliegue de ambiente')
+                
+            self.audit_log('El despliegue de ambiente fue exitoso ', 'Despliegue de ambiente')
             
         except Exception as e:
-            ejecucionPrueba=Reutilizables()
-            ejecucionPrueba.error_log('Ocurrio un error en la funcion (crearCarpte) en el archivo: ', 'DespliegueAmbiente')
+            
+            print(e)
 
     def audit_log(self, message, name_file):
         
@@ -53,6 +55,6 @@ class Reutilizables:
     def Enviar_notificacion(self):
         pass
         
-ejecucionPrueba=Reutilizables()
-
+ejecucionPrueba=Reutilizables(RUTAS.get('PATH_PROYECTO'), RUTAS.get('PATH_AUDIT'), RUTAS.get('PATH_LOGS'), RUTAS.get('PATH_TEMP'), RUTAS.get('PATH_INSUMO'), RUTAS.get('PATH_RESULTADO'))
+ejecucionPrueba.crearCarpetas()
 ejecucionPrueba.audit_log('se inicio la subtarea', 'Despliegue de ambiente')

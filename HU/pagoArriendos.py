@@ -4,16 +4,17 @@ import time
 import os
 import sys
 import subprocess
+from config.settings import SAP_CONIFG, RUTAS
 
 class PagoArriendos:
 
-    def __init__(self):
-        self.usuarioSAP= 'CGRPA074'
-        self.contrasenaSAP='Arriendos%312*'
-        self.clienteSAP='410'
-        self.idiomaSAP='EN'
-        self.aplicativoSAP=r"C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplgpad.exe"
-        self.sistemaSAP='ERP-CORPORATIVO-CALIDAD'
+    def __init__(self, usuariosSAP, contrasenaSAP, clienteSAP, idiomaSAP, aplicativoSAP,sistemaSAP):
+        self.usuarioSAP= usuariosSAP
+        self.contrasenaSAP=contrasenaSAP
+        self.clienteSAP=clienteSAP
+        self.idiomaSAP=idiomaSAP
+        self.aplicativoSAP=aplicativoSAP
+        self.sistemaSAP=sistemaSAP
 
     def abrir_SAP(self):
         try:
@@ -25,7 +26,7 @@ class PagoArriendos:
             try:
                 print(f"Iniciando SAP GUI desde: {self.aplicativoSAP}")
                 subprocess.Popen(self.aplicativoSAP)
-                time.sleep(5) # Dar tiempo suficiente para que se inicie la aplicación.
+                time.sleep(5)
             except FileNotFoundError:
                 print(f"ERROR: No se encontró el ejecutable en la ruta: {self.ruta_aplicativoSAP}")
                 return False
@@ -72,7 +73,13 @@ class PagoArriendos:
        
 
 
-ejecutarMain=PagoArriendos()
+ejecutarMain=PagoArriendos(SAP_CONIFG.get('SAP_USUARIO'),
+                           SAP_CONIFG.get('SAP_PASSWORD'),
+                           SAP_CONIFG.get('SAP_CLIENTE'),
+                           SAP_CONIFG.get('SAP_IDIOMA'),
+                           SAP_CONIFG.get('SAP_PATH'),
+                           SAP_CONIFG.get('SAP_SISTEMA')
+                           )
 
 ejecutarMain.abrir_SAP()
 
