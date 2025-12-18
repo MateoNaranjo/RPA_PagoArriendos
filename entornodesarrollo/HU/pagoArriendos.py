@@ -4,7 +4,7 @@ import time
 import os
 import sys
 import subprocess
-from config.settings import SAP_CONIFG, RUTAS
+from config.settings import SAP_CONFIG, RUTAS
 
 class PagoArriendos:
 
@@ -73,13 +73,13 @@ class PagoArriendos:
        
 
 
-ejecutarMain=PagoArriendos(SAP_CONIFG.get('SAP_USUARIO'),
-                           SAP_CONIFG.get('SAP_PASSWORD'),
-                           SAP_CONIFG.get('SAP_CLIENTE'),
-                           SAP_CONIFG.get('SAP_IDIOMA'),
-                           SAP_CONIFG.get('SAP_PATH'),
-                           SAP_CONIFG.get('SAP_SISTEMA')
+ejecutarMain=PagoArriendos(SAP_CONFIG.get('SAP_USUARIO'),
+                           SAP_CONFIG.get('SAP_PASSWORD'),
+                           SAP_CONFIG.get('SAP_CLIENTE'),
+                           SAP_CONFIG.get('SAP_IDIOMA'),
+                           SAP_CONFIG.get('SAP_PATH'),
+                           SAP_CONFIG.get('SAP_SISTEMA')
                            )
-
 ejecutarMain.abrir_SAP()
+ejecutarMain.ingresar_SAP(ejecutarMain.conectar_SAP())
 
