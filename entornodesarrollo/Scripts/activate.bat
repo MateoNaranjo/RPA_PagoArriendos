@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\ProgramData\RPA_PagoArriendos\entornodesarrollo
+set VIRTUAL_ENV=\\192.168.50.169\RPA_RIGO_GestionPagodeArrendamientos\RPA_PagoArriendos\entornodesarrollo
 
 if not defined PROMPT set PROMPT=$P$G
 
